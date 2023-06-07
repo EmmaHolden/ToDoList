@@ -1,0 +1,108 @@
+body {
+    background-color: #16003B;
+    color: #F5F5F5;
+    font-size: large;
+    
+}
+
+input[type=text] {
+    border-radius: 4px;
+    margin: 10px;
+  }
+
+  label {
+    color: #F5F5F5;
+
+  }
+
+form, h1 {
+    text-align: center;
+}
+
+li {
+    font-size:x-large
+}
+
+.instructions {
+    font-size: medium;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.container1 {
+    display: flex;
+    justify-content: center;
+}
+
+.container2 {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.counter {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.listAndButton {
+    display: flex;
+}
+
+.plusMinusButtons {
+    background-color: #F73D93;
+    color: #413F42;
+    border-radius: 50%;
+    font-size: 24px;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 20px;
+    border: 2px solid #413F42;
+}
+
+#listItem {
+    padding-right: 20px;
+}
+
+#resetComplete {
+    background-color: #F73D93;
+    color: #413F42;
+    border-radius: 12px;
+    padding: 10px;
+    margin: 10px;
+    font-size: 15px;
+    border: solid 2px #413F42;
+}
+
+#deleteAll {
+    background-color: #F73D93;
+    color: #413F42;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 10px;
+    font-size: 24px;
+    border: 2px solid #413F42;
+}
+
+#delete {
+    background-color: red;
+    color: #f5f5f5;
+    border-radius: 20px;
+    height: 50%;
+}
+
+#goal {
+    padding: 100px;
+}
+
+#submit {
+    background-color: #F73D93;
+    color: #413F42;
+    border: solid 1px #413F42;
+  }

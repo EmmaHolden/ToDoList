@@ -1,95 +1,86 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client' 
 
-export default function Home() {
+import { useState } from 'react'
+import Form from '@/components/Form'
+import Counter from '@/components/Counter'
+import Goal from '@/components/Goal'
+import './App.css';
+
+const App = () => {
+  const [input, setInput] = useState('')
+  const [items, setItems] = useState([])
+  const [complete, setComplete] = useState(0)
+  const [goal, setGoal] = useState(0)
+
+  const handleSubmit = (e) => { 
+    e.preventDefault()
+    let newItems = [...items] 
+    newItems.push(input) 
+    setItems(newItems) 
+    setInput('') 
+  }
+
+  const deleteItem = (index) => {
+    let newItems = [...items]
+    newItems.splice(index, 1)
+    setItems(newItems)
+  }
+
+  const completeItem = (event) => {
+    if (event.target.style.textDecoration) {
+      event.target.style.removeProperty('text-decoration'); 
+      if (goal > 0) {
+        let newComplete = complete
+        newComplete -= 1
+        setComplete(newComplete)
+        }
+    } else {
+        let newComplete = complete
+        newComplete += 1
+        setComplete(newComplete)
+        event.target.style.setProperty('text-decoration', 'line-through')
+    }
+    
+  }
+
+  const deleteAll = () => {
+    setItems([])
+  }
+  
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
+    <div>
+      <div>
+        <h1>To-do List</h1>
+      </div>
+      <div>
+        <Form handleSubmit = {handleSubmit} input = {input} setInput = {setInput}/>
+      </div>
+      <div>
+        <p className = "instructions">(Click on an item to cross it off your list without deleting it. Click again to undo this.)</p>
+      </div>
+      <div className = "container">
         <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+          <ul>
+            {items.map((item, index) => {
+              return (
+                <div className = "listAndButton">
+                  <li id= "listItem" onClick = { (event) => completeItem (event)}>{item}</li>
+                  <button id = "delete" onClick = {() => deleteItem(index)}>X</button>
+                </div>
+              )})}
+          </ul>
+        </div>
+        <div className = "container1" id="goal">
+          <Goal goal = {goal} setGoal = {setGoal}/>
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className = "container1">
+        <button id = "deleteAll" onClick = {() => deleteAll()}>Delete All</button>
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      <div>
+        <Counter items = {items} goal = {goal} complete = {complete} setComplete = {setComplete}/>
+      </div>     
+    </div>
   )
 }
+export default App
