@@ -29,7 +29,7 @@ const App = () => {
   const completeItem = (event) => {
     if (event.target.style.textDecoration) {
       event.target.style.removeProperty('text-decoration'); 
-      if (goal > 0) {
+      if (complete > 0) {
         let newComplete = complete
         newComplete -= 1
         setComplete(newComplete)
